@@ -93,3 +93,58 @@ function high(x) {
 
 // resultValue = high("man i need a taxi up to ubud");
 result.innerHTML = `<p>${resultValue}</p>`;
+
+//====CLASSES AND TDD
+
+// TODO: complete this object/class
+
+// The constructor takes in an array of items and a integer indicating how many
+// items fit within a single page
+function PaginationHelper(collection, itemsPerPage) {
+  (this.collection = collection), (this.itemsPerPage = itemsPerPage);
+
+  return this;
+}
+
+// returns the number of items within the entire collection
+PaginationHelper.prototype.itemCount = function () {
+  return this.collection.length;
+};
+
+// returns the number of pages
+PaginationHelper.prototype.pageCount = function () {
+  return Math.ceil(this.collection.length / this.itemsPerPage);
+};
+
+// returns the number of items on the current page. page_index is zero based.
+// this method should return -1 for pageIndex values that are out of range
+PaginationHelper.prototype.pageItemCount = function (pageIndex) {
+  const res = [];
+  for (let i = 0; i < this.collection.length; i += this.itemsPerPage) {
+    const subArray = this.collection.slice(i, i + this.itemsPerPage);
+    res.push(subArray);
+  }
+  return res[pageIndex] ? res[pageIndex].length : -1;
+};
+
+// determines what page an item is on. Zero based indexes
+// this method should return -1 for itemIndex values that are out of range
+PaginationHelper.prototype.pageIndex = function (itemIndex) {
+  const res = [];
+  for (let i = 0; i < this.collection.length; i += this.itemsPerPage) {
+    const subArray = this.collection.slice(i, i + this.itemsPerPage);
+    res.push(subArray);
+  }
+  const resultPage = res.find((page) =>
+    page.includes(this.collection[itemIndex])
+  );
+  return res.indexOf(resultPage);
+};
+
+var helper = new PaginationHelper(["a", "b", "c", "d", "e", "f"], 4);
+console.log("page count", helper.pageCount()); //should == 2
+console.log("item count", helper.itemCount()); //should == 6
+console.log("pageItem count 0", helper.pageItemCount(0)); //should == 4
+console.log("pageItem count 1", helper.pageItemCount(1)); // last page - should == 2
+console.log("pageItem count 2", helper.pageItemCount(2)); // should == -1 since the page is invalid
+console.log("pageIndex 5", helper.pageIndex(3));
