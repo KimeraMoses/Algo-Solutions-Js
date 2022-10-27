@@ -142,12 +142,12 @@ PaginationHelper.prototype.pageIndex = function (itemIndex) {
 };
 
 var helper = new PaginationHelper(["a", "b", "c", "d", "e", "f"], 4);
-console.log("page count", helper.pageCount()); //should == 2
-console.log("item count", helper.itemCount()); //should == 6
-console.log("pageItem count 0", helper.pageItemCount(0)); //should == 4
-console.log("pageItem count 1", helper.pageItemCount(1)); // last page - should == 2
-console.log("pageItem count 2", helper.pageItemCount(2)); // should == -1 since the page is invalid
-console.log("pageIndex 5", helper.pageIndex(3));
+// console.log("page count", helper.pageCount()); //should == 2
+// console.log("item count", helper.itemCount()); //should == 6
+// console.log("pageItem count 0", helper.pageItemCount(0)); //should == 4
+// console.log("pageItem count 1", helper.pageItemCount(1)); // last page - should == 2
+// console.log("pageItem count 2", helper.pageItemCount(2)); // should == -1 since the page is invalid
+// console.log("pageIndex 5", helper.pageIndex(3));
 
 //TEST CASES
 //Install a test library
@@ -218,15 +218,49 @@ function generateHashtag(str) {
   }
 }
 
-console.log(
-  generateHashtag(
-    "Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Cat"
-  )
-); //false
-console.log(
-  generateHashtag(
-    "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-  )
-); //false
+// console.log(
+//   generateHashtag(
+//     "Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Cat"
+//   )
+// ); //false
+// console.log(
+//   generateHashtag(
+//     "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+//   )
+// ); //false
 
-console.log(generateHashtag("Moxhus is great")); //#MoxhusIsGreat
+// console.log(generateHashtag("Moxhus is great")); //#MoxhusIsGreat
+
+//Converting from Binary to decimal
+
+function BinaryToDecimal(numBinary) {
+  const resultArray = [];
+  for (let i = 0; i < numBinary.length; i++) {
+    if (Number(numBinary[i]) === 0 || Number(numBinary[i]) === 1) {
+      const pow = numBinary.length - 1 - i;
+      const multiple = 2 ** pow;
+      const result = Number(numBinary[i]) * multiple;
+      resultArray.push(result);
+    } else {
+      return "Invalid Binary";
+    }
+  }
+  return resultArray.reduce((a, b) => a + b);
+}
+
+// console.log(BinaryToDecimal("00000000000000000000110010010")); // 402
+
+function DecimalToBinary(numDec) {
+  let bin = 0;
+  let reminder;
+  let i = 1;
+  while (numDec != 0) {
+    reminder = numDec % 2;
+    numDec = parseInt(numDec / 2);
+    bin = bin + reminder * i;
+    i = i * 10;
+  }
+  return bin;
+}
+
+// console.log(DecimalToBinary("6"));
