@@ -257,10 +257,79 @@ function DecimalToBinary(numDec) {
   while (numDec != 0) {
     reminder = numDec % 2;
     numDec = parseInt(numDec / 2);
+
     bin = bin + reminder * i;
     i = i * 10;
   }
   return bin;
 }
 
-// console.log(DecimalToBinary("6"));
+console.log(DecimalToBinary(""));
+
+// String Challenge
+// Have the function StringChallenge(str) take the str parameter being passed and
+// return the string true if the parameter is a palindrome,
+// (the string is the same forward as it is backward) otherwise return the string false.
+// The parameter entered may have punctuation and symbols but they should not affect whether
+// the string is in fact a palindrome. For example: "Anne, I vote more cars race Rome-to-Vienna"
+// should return true.
+
+function StringChallenge(str) {
+  let left = 0;
+  let right = str.length - 1;
+  while (left < right) {
+    if (!isLetter(str[left])) {
+      left++;
+    } else if (!isLetter(str[right])) {
+      right--;
+    } else {
+      if (str[left].toLowerCase() !== str[right].toLowerCase()) {
+        return "false";
+      } else {
+        left++;
+        right--;
+      }
+    }
+  }
+  // code goes here
+  return "true";
+}
+
+const isLetter = (c) => {
+  return c.match(/[a-z]/i);
+};
+
+// keep this function call here
+console.log(StringChallenge("Noel - sees Leona"));
+console.log(StringChallenge("Anne, I vote more cars race Rome-to-Vienna"));
+console.log(StringChallenge("A war at Tarawa!"));
+
+// Input: "Noel - sees Leon"
+// Output: true
+// Input: "A war at Tarawa!"
+// Output: true
+
+// Array Challenge
+// Have the function ArrayChallenge(arr) take the array of numbers stored in arr and determine the total number of duplicate entries. For example if the input is [1, 2, 2, 2, 3] then your program should output 2 because there are two duplicates of one of the elements.
+// Examples
+// Input: [0,-2,-2,5,5,5]
+// Output: 3
+// Input: [100,2,101,4]
+// Output: 0
+
+// function ArrayChallenge(arr) {
+//   const duplicates = 0;
+//   const obj = [];
+
+//   for (let num in arr) {
+//     console.log(num);
+//     if (obj.indexOf(num) !== -1) {
+//       obj.push(num);
+//       duplicates++;
+//     }
+//   }
+
+//   return duplicates;
+// }
+
+// console.log(ArrayChallenge([0, -2, -2, 5, 5, 5]));
